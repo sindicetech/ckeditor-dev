@@ -29,6 +29,8 @@ var CKBUILDER_CONFIG = {
 		'tests'
 	],
 	plugins: {
+                forms: 1,
+                fakeobjects: 1,
 		a11yhelp: 1,
 		about: 1,
 		basicstyles: 1,

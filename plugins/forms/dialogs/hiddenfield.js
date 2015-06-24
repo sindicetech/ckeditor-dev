@@ -25,13 +25,15 @@ CKEDITOR.dialog.add( 'hiddenfield', function( editor ) {
 		onOk: function() {
 			var name = this.getValueOf( 'info', '_cke_saved_name' ),
 				editor = this.getParentEditor(),
-				element = CKEDITOR.env.ie && CKEDITOR.document.$.documentMode < 8 ?
+				element = CKEDITOR.document.$.documentMode < 8 ?
 					editor.document.createElement( '<input name="' + CKEDITOR.tools.htmlEncode( name ) + '">' ) :
-					editor.document.createElement( 'input' );
+					editor.document.createElement( 'input' ); // Sindice fixed
 
 			element.setAttribute( 'type', 'hidden' );
 			this.commitContent( element );
 			var fakeElement = editor.createFakeElement( element, 'cke_hidden', 'hiddenfield' );
+                        // Sindice customization, the corresponding part is in fakeobjects/plugin.js
+                        fakeElement.setAttribute('title', this.getValueOf( 'info', '_cke_saved_name' ) + ' : ' + this.getValueOf( 'info', 'value' ));    
 			if ( !this.hiddenField )
 				editor.insertElement( fakeElement );
 			else {

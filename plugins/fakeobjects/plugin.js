@@ -127,12 +127,20 @@
 		realElement.writeHtml( writer );
 		html = writer.getHtml();
 
+		// Sindice customization, the corresponding part is in hiddenfield.js
+		var title;
+		if (realElementType == 'hiddenfield') {
+			title = realElement.attributes['name'] + ' : ' + realElement.attributes['value'];
+		}	else {
+			title = label;
+		}
+
 		var attributes = {
 			'class': className,
 			'data-cke-realelement': encodeURIComponent( html ),
 			'data-cke-real-node-type': realElement.type,
 			alt: label,
-			title: label,
+			title: title,
 			align: realElement.attributes.align || ''
 		};
 
